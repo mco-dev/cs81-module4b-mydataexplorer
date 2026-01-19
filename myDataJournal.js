@@ -88,6 +88,38 @@ function avgSleep(weekData) {
     return Math.round(totalSleep / weekData.length);
 }
 
+function avgMood(weekData) {
+    let myMood = {};
+    let moodCount = 0;
+    for (let feeling of weekData) { // Loop through each day's data
+        if (myMood[feeling.mood]) { // Check if the mood already exists in the object
+            myMood[feeling.mood] += 1; // Increment if found
+        } else {
+            myMood[feeling.mood] = 1; // Add it to the list if not found
+        }
+    }
+    for (let mood in myMood) {
+        if (myMood[mood] > moodCount) {
+            moodCount = myMood[mood];
+        }
+    }
+    return weekData[moodCount].mood; // Return the most common mood (highest count)
+}
+
+function mostProductiveDay(weekData) {
+    let productiveDay = weekData[0];
+    for (let i = 1; i < weekData.length; i++) {
+        if (weekData[i].challengesSolved > productiveDay.challengesSolved) {
+            productiveDay = weekData[i];
+        }   
+    }
+    return productiveDay;
+}
+
 console.log(`Day with maximum screen time: ${maxScreenTimeDay(weekData).day}`);
 
 console.log(`Average sleep hours: ${avgSleep(weekData)}`);
+
+console.log(`Most common mood: ${avgMood(weekData)}`);
+
+console.log(`Most productive day: ${mostProductiveDay(weekData).day}`);
