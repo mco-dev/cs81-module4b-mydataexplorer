@@ -80,4 +80,14 @@ function maxScreenTimeDay(weekData) {
     return maxDay;
 }
 
+function avgSleep(weekData) {
+    let totalSleep = 0;
+    for (let i = 0; i < weekData.length; i++) {
+        totalSleep += weekData[i].sleepHours;
+    }
+    return Math.round(totalSleep / weekData.length);
+}
+
 console.log(`Day with maximum screen time: ${maxScreenTimeDay(weekData).day}`);
+
+console.log(`Average sleep hours: ${avgSleep(weekData)}`);
